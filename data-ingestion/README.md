@@ -52,6 +52,7 @@ The service can be extended to detect additional entity types by modifying the `
 
 The service supports multiple environments (dev, staging, prod) through separate `.env` files:
 
+**Core Configuration:**
 - `ENVIRONMENT`: Current environment (dev/staging/prod)
 - `AWS_REGION`: AWS region for S3 and Bedrock
 - `S3_BUCKET_NAME`: S3 bucket containing PDFs
@@ -62,6 +63,31 @@ The service supports multiple environments (dev, staging, prod) through separate
 - `MAX_CHUNK_SIZE`: Maximum chunk size in characters (default: 1000)
 - `MIN_CHUNK_SIZE`: Minimum chunk size in characters (default: 200)
 - `BREAKPOINT_THRESHOLD_TYPE`: Chunking threshold type (default: `percentile`)
+
+**Metadata Fields (Required for Enterprise/Federal Deployments):**
+- `DEPARTMENT`: Organizational department (required) - e.g., `Engineering`, `Finance`, `HR`
+- `ROLES_ALLOWED`: Comma-separated list of allowed roles (required) - e.g., `developer,manager,analyst`
+- `DOCUMENT_ID`: Unique document identifier (optional, auto-generated from S3 key if not provided)
+
+**Recommended Metadata Fields:**
+- `DIVISION`: Sub-unit within department - e.g., `Platform`, `Infrastructure`, `Product`
+- `TEAM`: Specific team - e.g., `DevOps`, `Security`, `API Team`
+- `DOC_TYPE`: Document type - e.g., `PDF`, `policy`, `SOP`, `manual`
+- `TAGS`: Comma-separated tags - e.g., `onboarding,api,authentication`
+
+**Optional Metadata Fields:**
+- `DOCUMENT_TITLE`: Human-readable document title
+- `DOCUMENT_VERSION`: Document version
+- `CLASSIFICATION`: Document classification - e.g., `internal`, `public`, `FOUO`
+- `SECURITY_LEVEL`: Security level - e.g., `low`, `medium`, `high`
+- `OWNER`: Document owner
+- `DATA_DOMAIN`: Data domain - e.g., `HR`, `Finance`, `Tax`, `API`
+- `SOURCE_URL`: Original source location
+- `INGESTED_BY`: User/system that performed ingestion (defaults to `USER` env var)
+- `EMBEDDING_MODEL_VERSION`: Version of embedding model
+- `CHUNKER_VERSION`: Version of chunker
+
+For complete metadata documentation, see [`METADATA.md`](METADATA.md).
 
 ### Running the Pipeline
 

@@ -22,9 +22,20 @@ class PiiPresidioService:
         ]
 
     def redact(self, text: str):
+        """
+        Redact PII from text and return detected entity types.
+        
+        Returns:
+            tuple: (redacted_text, has_pii, detected_entities)
+            - redacted_text: Text with PII redacted
+            - has_pii: Boolean indicating if PII was found
+            - detected_entities: List of entity type names found
+        """
         results = self.analyzer.analyze(text=text, entities=self.entities, language="en")
         if not results:
-            return text, False
+            return text, False, []
+        
+        detected_entities = list(set([r.entity_type for r in results]))
         redacted = self.anonymizer.anonymize(text=text, analyzer_results=results)
-        return redacted.text, True
+        return redacted.text, True, detected_entities
 
