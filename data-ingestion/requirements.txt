@@ -1,0 +1,13 @@
+boto3
+pypdf
+opensearch-py
+python-dotenv
+presidio-analyzer
+presidio-anonymizer
+spacy
+langchain-text-splitters
+langchain-core
+en_core_web_lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl
+requests
+pytest
+
