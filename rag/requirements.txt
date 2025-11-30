@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+boto3
+opensearch-py
+python-dotenv
+pydantic
+pydantic-settings
+requests
+pytest
+pytest-cov
+
